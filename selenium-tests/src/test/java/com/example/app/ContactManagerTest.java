@@ -6,7 +6,6 @@ import org.testng.annotations.*;
 import org.testng.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import com.example.app.pages.HomePage;
 import com.example.app.pages.AddContactPage;
 import com.example.app.pages.ViewContactPage;
 import com.example.app.utils.Contact;
