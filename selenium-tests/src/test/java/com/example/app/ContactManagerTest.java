@@ -1,14 +1,15 @@
 package com.example.app;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.testng.Assert;
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 
 import com.example.app.pages.AddContactPage;
 import com.example.app.pages.ViewContactPage;
 import com.example.app.utils.Contact;
+import com.example.app.utils.SeleniumSetup;
 
 
 public class ContactManagerTest {
@@ -18,8 +19,9 @@ public class ContactManagerTest {
     @BeforeClass
     public void setup() {
         // Automatically download and setup ChromeDriver
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        //WebDriverManager.chromedriver().setup();
+        //driver = new ChromeDriver();
+        driver = SeleniumSetup.createDriver();
     }
 
     @BeforeMethod
