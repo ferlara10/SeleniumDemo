@@ -8,11 +8,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the repository
+      # 1 Checkout repository
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Set up Java (adjust version to your project, e.g. 11, 17, 21)
+      # 2 Set up PHP
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, mysqli
+
+      # 3 Install Composer dependencies
+      - name: Install Composer dependencies
+        run: |
+          if [ -f "php-backend/composer.json" ]; then
+            composer install --no-interaction --prefer-dist --working-dir=php-backend
+          fi
+
+      # 4 Start PHP built-in server
+      - name: Start PHP server
+        run: |
+          nohup php -S 127.0.0.1:8000 -t php-backend/public > server.log 2>&1 &
+
+      # 5 Set up Java
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -20,23 +39,22 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # 3. Install Chrome browser
+      # 6 Install Google Chrome
       - name: Install Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # 4. Install ChromeDriver
+      # 7 Install ChromeDriver
       - name: Install ChromeDriver
         run: |
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+' | head -1)
           sudo apt-get install -y chromium-chromedriver
           sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
 
-      # 5. Build project with Maven
-      - name: Build with Maven
-        run: mvn clean install -B
+      # 8 Build Selenium + TestNG project
+      - name: Build Maven project
+        run: mvn -f selenium-tests/pom.xml clean install -B
 
-      # 6. Run TestNG Selenium tests
+      # 9 Run TestNG Selenium tests
       - name: Run tests
         run: mvn test
