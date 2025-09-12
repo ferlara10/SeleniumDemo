@@ -29,7 +29,7 @@ jobs:
       # 4 Start PHP built-in server
       - name: Start PHP server
         run: |
-          nohup php -S 127.0.0.1:8000 -t php-backend/public > server.log 2>&1 &
+          nohup php -S 127.0.0.1:8000 -t php-backend > server.log 2>&1 &
 
       # 5 Set up Java
       - name: Set up JDK 17
