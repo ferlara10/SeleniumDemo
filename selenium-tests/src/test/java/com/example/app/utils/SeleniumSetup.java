@@ -20,6 +20,7 @@ public class SeleniumSetup {
         options.addArguments("--disable-gpu");           // optional
         options.addArguments("--remote-allow-origins=*"); // Chrome 111+
         options.addArguments("--user-data-dir=/tmp/chrome-user-data"); // avoid conflicts
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
         return new ChromeDriver(options);
     }
