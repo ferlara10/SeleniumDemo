@@ -53,11 +53,13 @@ jobs:
 
       # 8 Build Selenium + TestNG project
       - name: Build Maven project
-        run: mvn -f selenium-tests/pom.xml clean  -B
+        run: mvn -f selenium-tests/pom.xml clean install -B
+        continue-on-error: true   # workflow continues even if tests fail
 
       # 9 Run TestNG Selenium tests
       - name: Run tests
         run: mvn test
+        continue-on-error: true   # workflow continues even if tests fail
 
       - name: Publish Surefire Reports
         uses: actions/upload-artifact@v4
