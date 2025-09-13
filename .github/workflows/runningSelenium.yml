@@ -52,8 +52,8 @@ jobs:
           sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
 
       # 8 Build Selenium + TestNG project
-      #- name: Build Maven project
-      #  run: mvn -f selenium-tests/pom.xml clean install -B
+      - name: Build Maven project
+        run: mvn -f selenium-tests/pom.xml clean  -B
 
       # 9 Run TestNG Selenium tests
       - name: Run tests
