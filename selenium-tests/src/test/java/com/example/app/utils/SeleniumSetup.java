@@ -7,6 +7,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
 public class SeleniumSetup {
     public static WebDriver createDriver() {
         // Automatically setup ChromeDriver
@@ -25,4 +29,13 @@ public class SeleniumSetup {
         return new ChromeDriver(options);
         //return new ChromeDriver();
     }
+
+    public static void waitForPageLoad(WebDriver driver, int timeoutSeconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds)).until(
+            webDriver -> ((JavascriptExecutor) webDriver)
+                    .executeScript("return document.readyState")
+                    .equals("complete")
+        );
+    }
+
 }

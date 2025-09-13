@@ -1,5 +1,7 @@
 package com.example.app;
 
+import java.sql.Driver;
+
 import org.openqa.selenium.WebDriver;
 //import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -23,13 +25,14 @@ public class ContactManagerTest {
         //driver = new ChromeDriver();
         driver = SeleniumSetup.createDriver();
         driver.get("http://localhost:8000/");
+        SeleniumSetup.waitForPageLoad(driver, 10);
     }
 
     @BeforeMethod
     public void navigateToHomePage() {
         //driver.get("http://localhost:8000/");
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -45,8 +48,8 @@ public class ContactManagerTest {
         ViewContactPage viewContactPage = new ViewContactPage(driver);
         Contact newViewContact = viewContactPage.getContact(newContact.getID());
 
-        System.out.println("****************** ID: " + newContact.getID());
-        System.out.println("************** New ID: " + newViewContact.getID());
+        System.out.println(" ID: " + newContact.getID());
+        System.out.println(" New ID: " + newViewContact.getID());
         Assert.assertEquals(newContact.getID(), newViewContact.getID());
         System.out.println("****************** END ADD CONTACT ********************");
     }
@@ -58,7 +61,7 @@ public class ContactManagerTest {
         addContactPage.addNewContact("Luis Lara", "luis.lara@example.com", "0987654321");
         Contact newContact = addContactPage.addNewContact("Val Burke", "val.burke@example.com", "1234567890");
         addContactPage.addNewContact("Fernando Lemus", "lemus.fer@example.com", "8798124300");
-
+        System.out.println("------------ > contacts were added! ");
         ViewContactPage viewContactPage = new ViewContactPage(driver);
         Contact newViewContact = viewContactPage.getContact(newContact.getID());
 

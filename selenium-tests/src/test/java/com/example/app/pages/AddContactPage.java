@@ -4,8 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.List;
-import com.example.app.utils.*;;
+import com.example.app.utils.*;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddContactPage {
 
@@ -23,6 +27,8 @@ public class AddContactPage {
     }
 
     public void setName(String name) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput));
         driver.findElement(nameInput).sendKeys(name);
     }
 
