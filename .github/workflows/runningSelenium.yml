@@ -58,3 +58,9 @@ jobs:
       # 9 Run TestNG Selenium tests
       - name: Run tests
         run: mvn test
+
+      - name: Publish Surefire Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: selenium-tests/target/surefire-reports
