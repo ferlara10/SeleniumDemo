@@ -22,12 +22,12 @@ public class ContactManagerTest {
         //WebDriverManager.chromedriver().setup();
         //driver = new ChromeDriver();
         driver = SeleniumSetup.createDriver();
-        //driver.get("http://localhost:8000/");
+        driver.get("http://localhost:8000/");
     }
 
     @BeforeMethod
     public void navigateToHomePage() {
-        driver.get("http://localhost:8000/");
+        //driver.get("http://localhost:8000/");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

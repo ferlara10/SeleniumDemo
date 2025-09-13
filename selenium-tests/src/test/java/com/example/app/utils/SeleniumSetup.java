@@ -11,7 +11,7 @@ public class SeleniumSetup {
     public static WebDriver createDriver() {
         // Automatically setup ChromeDriver
         WebDriverManager.chromedriver().setup();
-
+        
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");         // Headless mode
         options.addArguments("--window-size=1920,1080"); // important for headless
@@ -21,7 +21,8 @@ public class SeleniumSetup {
         options.addArguments("--remote-allow-origins=*"); // Chrome 111+
         options.addArguments("--user-data-dir=/tmp/chrome-user-data"); // avoid conflicts
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
+         
         return new ChromeDriver(options);
+        //return new ChromeDriver();
     }
 }
